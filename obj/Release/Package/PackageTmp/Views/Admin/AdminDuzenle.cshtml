@@ -1,0 +1,25 @@
+﻿@model MvcCv.Models.Entity.TblLogin 
+
+@{
+    ViewBag.Title = "AdminDuzenle";
+    Layout = "~/Views/Shared/AdminPaneliLayout.cshtml";
+}
+
+
+
+<br />
+<h4>  Şifrenizi Güncelleyiniz.</h4>
+<br />
+<form method="post">
+    @Html.Label("KullaniciAdi")
+    @Html.TextBoxFor(x => x.KullaniciAdi, new { @class = "form-control" })
+    <br />
+
+    @Html.Label("Sifre")
+    @Html.TextBoxFor(x => x.Sifre, new { @class = "form-control" })
+    <br />
+
+    <button class="btn btn-info">Güncelle</button>
+</form>
+
+

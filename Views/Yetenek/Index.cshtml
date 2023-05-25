@@ -1,0 +1,94 @@
+﻿@using MvcCv.Models.Entity
+@model List<TblTalent>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminPaneliLayout.cshtml";
+}
+
+
+@{string renk = ""; }
+@{string Labelrenk = ""; }
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Yetenek Listem</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <a href="/Yetenek/YeniYetenek/" class="btn btn-outline-success">Yeni Yetenek Ekle</a>
+                                <br />
+                                <br />
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Yetenek</th>
+                                            <th>Derece</th>
+                                            <th style="width: 40px">Oran</th>
+                                            <th>İşlemler</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            if (item.oran >= 0 && item.oran <= 50)
+                                            {
+                                                renk = "progress-bar bg-danger";
+                                                Labelrenk = "badge bg-danger";
+                                            }
+
+                                            if (item.oran >= 51 && item.oran <= 70)
+                                            {
+                                                renk = "progress-bar bg-warning";
+                                                Labelrenk = "badge bg-warning";
+                                            }
+
+                                            if (item.oran >= 71 && item.oran <= 84)
+                                            {
+                                                renk = "progress-bar bg-primary";
+                                                Labelrenk = "badge bg-primary";
+                                            }
+
+                                            if (item.oran >= 85 && item.oran <= 100)
+                                            {
+                                                renk = "progress-bar bg-success";
+                                                Labelrenk = "badge bg-success";
+                                            }
+                                        <tr>
+                                            <td>@item.ID</td>
+                                            <td>@item.Yetenek</td>
+
+                                            <td>
+                                                <div class="progress progress-xs">
+                                                    <div class="@renk" style="width:@item.oran%"></div>
+                                                </div>
+                                            </td>
+                                            <td><span class="@Labelrenk">@item.oran%</span></td>
+                                            <td><a href="/Yetenek/YetenekSil/@item.ID" class="btn btn-outline-danger">Sil</a>
+                                            <a href="/Yetenek/YetenekDuzenle/@item.ID" class="btn btn-outline-info">Güncelle</a></td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+</body>
+</html>
